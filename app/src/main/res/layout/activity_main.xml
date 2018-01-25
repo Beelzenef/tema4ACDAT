@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_tiempoJSON"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick_lanzarExs"
+        android:text="Tiempo en JSON" />
+
+    <Button
+        android:id="@+id/btn_tiempoJSONXML"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick_lanzarExs"
+        android:text="Tiempo en JSON o XML" />
+
+    <Button
+        android:id="@+id/btn_cambioDivisas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick_lanzarExs"
+        android:text="Cambio de divisas" />
+
+    <Button
+        android:id="@+id/btn_bizizaragoza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick_lanzarExs"
+        android:text="BiziZaragoza" />
+
+    <Button
+        android:id="@+id/btn_datos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick_lanzarExs"
+        android:text="Datos públicos" />
+</LinearLayout>
