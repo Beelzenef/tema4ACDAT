@@ -1,6 +1,5 @@
 package com.example.tema4acdat.utils;
 
-
 import com.example.tema4acdat.pojo.Biblioteca;
 import com.example.tema4acdat.pojo.Estacion;
 
@@ -62,5 +61,14 @@ public class AnalisisJSON {
         }
 
         return listaEstaciones;
+    }
+
+    public static double leerCambioDivisas(JSONObject texto) throws JSONException {
+        double cambio = 0;
+
+        JSONObject eurosJSON = texto.getJSONObject("eur");
+        cambio = eurosJSON.getDouble("rate");
+
+        return cambio;
     }
 }
