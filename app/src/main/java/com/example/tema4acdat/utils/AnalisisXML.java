@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Analizador de XML
  */
 
-public class CheckXML {
+public class AnalisisXML {
 
     public static String analizar(String texto) throws XmlPullParserException, IOException {
         StringBuilder cadena = new StringBuilder();
