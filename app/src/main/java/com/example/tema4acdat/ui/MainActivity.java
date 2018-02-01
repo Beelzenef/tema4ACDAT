@@ -1,9 +1,13 @@
-package com.example.tema4acdat;
+package com.example.tema4acdat.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.tema4acdat.R;
+import com.example.tema4acdat.ui.bizizaragoza.BiziActivity;
+import com.example.tema4acdat.ui.datospublicos.DatosActivity;
 
 public class MainActivity extends AppCompatActivity {
 

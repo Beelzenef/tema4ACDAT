@@ -1,4 +1,4 @@
-package com.example.tema4acdat;
+package com.example.tema4acdat.ui.datospublicos;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,8 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.tema4acdat.R;
 import com.example.tema4acdat.network.RestClient;
 import com.example.tema4acdat.pojo.Biblioteca;
+import com.example.tema4acdat.utils.AnalisisJSON;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONObject;
@@ -64,9 +66,10 @@ public class DatosActivity extends AppCompatActivity implements AdapterView.OnIt
                 try {
                     progreso.dismiss();
                     // Cargar bibliotecas
+                    listaBibliotecas = AnalisisJSON.leerBibliotecas(response);
                     mostrar();
                 } catch (Exception e) {
-                    Toast.makeText(DatosActivity.this, "¡Error al mostrar contactos! :(",
+                    Toast.makeText(DatosActivity.this, "¡Error al mostrar bibliotecas! :(",
                             Toast.LENGTH_SHORT).show();
                 }
             }

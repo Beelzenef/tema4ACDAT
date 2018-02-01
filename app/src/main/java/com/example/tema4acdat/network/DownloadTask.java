@@ -2,8 +2,6 @@ package com.example.tema4acdat.network;
 
 import android.os.Environment;
 
-import com.example.tema4acdat.pojo.FailureEvent;
-import com.example.tema4acdat.pojo.SuccessEvent;
 import com.loopj.android.http.FileAsyncHttpResponseHandler;
 
 import org.greenrobot.eventbus.EventBus;

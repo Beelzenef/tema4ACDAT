@@ -1,13 +1,15 @@
-package com.example.tema4acdat;
+package com.example.tema4acdat.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class TiempoJSONActivity extends AppCompatActivity {
+import com.example.tema4acdat.R;
+
+public class DivisasActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tiempo_json);
+        setContentView(R.layout.activity_divisas);
     }
 }

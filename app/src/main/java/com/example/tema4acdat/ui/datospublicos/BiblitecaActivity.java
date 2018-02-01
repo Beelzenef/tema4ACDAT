@@ -1,9 +1,10 @@
-package com.example.tema4acdat;
+package com.example.tema4acdat.ui.datospublicos;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.tema4acdat.R;
 import com.example.tema4acdat.pojo.Biblioteca;
 
 public class BiblitecaActivity extends AppCompatActivity {

@@ -9,19 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BiziActivity"></activity>
-        <activity android:name=".TiempoJSONActivity"></activity>
-        <activity android:name=".TiempoJSONXMLActivity"></activity>
-        <activity android:name=".DivisasActivity"></activity>
-        <activity android:name=".DatosActivity"></activity>
-        <activity android:name=".BiblitecaActivity"></activity>
+        <activity android:name=".ui.bizizaragoza.BiziActivity" />
+        <activity android:name=".ui.TiempoJSONActivity" />
+        <activity android:name=".ui.TiempoJSONXMLActivity" />
+        <activity android:name=".ui.DivisasActivity" />
+        <activity android:name=".ui.datospublicos.DatosActivity" />
+        <activity android:name=".ui.datospublicos.BiblitecaActivity" />
+        <activity android:name=".ui.bizizaragoza.EstacionActivity"></activity>
     </application>
 
 </manifest>

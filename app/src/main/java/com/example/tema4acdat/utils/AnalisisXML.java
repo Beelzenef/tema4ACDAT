@@ -1,12 +1,7 @@
 package com.example.tema4acdat.utils;
 
-import android.content.Context;
-import android.content.res.XmlResourceParser;
 import android.os.Environment;
 import android.util.Xml;
-
-import com.example.tema4acdat.R;
-import com.example.tema4acdat.pojo.Noticia;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

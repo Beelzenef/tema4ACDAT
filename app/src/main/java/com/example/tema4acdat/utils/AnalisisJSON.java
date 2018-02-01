@@ -2,6 +2,7 @@ package com.example.tema4acdat.utils;
 
 
 import com.example.tema4acdat.pojo.Biblioteca;
+import com.example.tema4acdat.pojo.Estacion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +21,7 @@ public class AnalisisJSON {
 
         Biblioteca bibliotecaLeída;
 
-        JSONArray listaBibliosJSON = new JSONArray(texto.getString("elements"));
+        JSONArray listaBibliosJSON = texto.getJSONArray("elements");
         JSONObject bibliotecaJSON;
 
         for (int i = 0; i < 20; i++) {
@@ -38,5 +39,28 @@ public class AnalisisJSON {
         }
 
         return listaBibliotecas;
+    }
+
+    public static ArrayList<Estacion> leerEstaciones (JSONObject texto) throws JSONException {
+        ArrayList<Estacion> listaEstaciones = new ArrayList<>();
+
+        Estacion estacionLeida;
+
+        JSONArray listaEstacionesJSON = texto.getJSONArray("result");
+        JSONObject estacionJSON;
+
+        for (int i = 0; i < listaEstaciones.size() ; i++) {
+            estacionJSON = listaEstacionesJSON.getJSONObject(i);
+
+            estacionLeida = new Estacion();
+            estacionLeida.setDireccion(estacionJSON.getString("title"));
+            estacionLeida.setEstado(estacionJSON.getString("estado"));
+            estacionLeida.setBicisDisponibles(estacionJSON.getInt("bicisDisponibles"));
+            estacionLeida.setAnclajes(estacionJSON.getInt("anclajesDisponibles"));
+
+            listaEstaciones.add(estacionLeida);
+        }
+
+        return listaEstaciones;
     }
 }

@@ -5,6 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tema4acdat.TiempoJSONXMLActivity">
+    tools:context="com.example.tema4acdat.ui.TiempoJSONXMLActivity">
 
 </android.support.constraint.ConstraintLayout>
