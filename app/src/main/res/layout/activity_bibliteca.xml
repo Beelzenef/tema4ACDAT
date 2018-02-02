@@ -1,49 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.datospublicos.BiblitecaActivity">
+    tools:context=".ui.datospublicos.BiblitecaActivity"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Biblioteca:"/>
+        android:text="Biblioteca:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    <TextView
+        android:id="@+id/txtV_BiblioDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtV_BiblioDescripcion"/>
+        android:text="URL:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    <TextView
+        android:id="@+id/txtV_BiblioURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_URLBiblio"
+        android:clickable="true"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="URL:"/>
+        android:text="Email:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    <TextView
+        android:id="@+id/txtV_BiblioEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_URLBiblio"
+        android:clickable="true"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtV_BiblioURL"/>
+        android:text="Teléfono de contacto:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <TextView
+        android:id="@+id/txtV_BiblioTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtV_BiblioEmail"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teléfono de contacto:"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtV_BiblioTelefono"/>
-
-</ListView>
+</LinearLayout>
