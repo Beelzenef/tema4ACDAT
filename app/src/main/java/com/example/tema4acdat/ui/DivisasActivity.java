@@ -89,6 +89,8 @@ public class DivisasActivity extends AppCompatActivity {
             }
         });
 
+        edt_CambioActual.setText(Double.toString(miConversor.getCambioMoneda()));
+
         // Seleccionando tipo de cambio
         if (radB_aDolares.isChecked()) {
             if (edt_aEuros.getText().length() != 0 && !edt_aEuros.getText().toString().equals(".")) {

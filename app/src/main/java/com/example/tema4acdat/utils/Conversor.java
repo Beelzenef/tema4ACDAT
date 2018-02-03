@@ -33,4 +33,7 @@ public final class Conversor {
         this.cambioMoneda = 0.84;
     }
 
+    public double getCambioMoneda() {
+        return cambioMoneda;
+    }
 }

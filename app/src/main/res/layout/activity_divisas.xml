@@ -71,6 +71,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:id="@+id/edT_Cambio"
+            android:enabled="false"
             android:inputType="numberDecimal"/>
 
     </LinearLayout>

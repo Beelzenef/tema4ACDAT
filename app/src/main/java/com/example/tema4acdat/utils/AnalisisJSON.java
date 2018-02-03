@@ -1,6 +1,7 @@
 package com.example.tema4acdat.utils;
 
 import com.example.tema4acdat.pojo.Biblioteca;
+import com.example.tema4acdat.pojo.Ciudad;
 import com.example.tema4acdat.pojo.Estacion;
 
 import org.json.JSONArray;
@@ -70,5 +71,16 @@ public class AnalisisJSON {
         cambio = eurosJSON.getDouble("rate");
 
         return cambio;
+    }
+
+    public static Ciudad leerTiempo (JSONObject texto) throws JSONException {
+        Ciudad ciudad = new Ciudad();
+
+        JSONObject tiempoJSON = texto.getJSONObject("main");
+        ciudad.setTemperatura(tiempoJSON.getDouble("temp"));
+        ciudad.setHumedad(tiempoJSON.getDouble("humidity"));
+        ciudad.setPresion(tiempoJSON.getDouble("pressure"));
+
+        return ciudad;
     }
 }

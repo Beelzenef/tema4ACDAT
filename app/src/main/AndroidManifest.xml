@@ -21,12 +21,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.bizizaragoza.BiziActivity" />
-        <activity android:name=".ui.TiempoJSONActivity" />
+        <activity android:name=".ui.tiempojson.TiempoJSONActivity" />
         <activity android:name=".ui.TiempoJSONXMLActivity" />
         <activity android:name=".ui.DivisasActivity" />
         <activity android:name=".ui.datospublicos.DatosActivity" />
         <activity android:name=".ui.datospublicos.BiblitecaActivity" />
-        <activity android:name=".ui.bizizaragoza.EstacionActivity"></activity>
+        <activity android:name=".ui.bizizaragoza.EstacionActivity" />
+        <activity android:name=".ui.tiempojson.CiudadTiempoJSON"></activity>
     </application>
 
 </manifest>

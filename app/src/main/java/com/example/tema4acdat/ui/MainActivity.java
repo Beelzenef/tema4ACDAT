@@ -8,6 +8,7 @@ import android.view.View;
 import com.example.tema4acdat.R;
 import com.example.tema4acdat.ui.bizizaragoza.BiziActivity;
 import com.example.tema4acdat.ui.datospublicos.DatosActivity;
+import com.example.tema4acdat.ui.tiempojson.TiempoJSONActivity;
 
 public class MainActivity extends AppCompatActivity {
 
