@@ -31,7 +31,7 @@ public class TiempoJSONActivity extends AppCompatActivity  implements AdapterVie
 
     private void cargarListaCiudades() {
         listaCiudades = new ArrayList<>();
-        listaCiudades.add("Málaga");
+        listaCiudades.add("Malaga");
         listaCiudades.add("Barcelona");
         listaCiudades.add("Zaragoza");
         listaCiudades.add("Bilbao");

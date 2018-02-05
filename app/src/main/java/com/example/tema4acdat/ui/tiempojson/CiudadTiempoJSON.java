@@ -34,7 +34,7 @@ public class CiudadTiempoJSON extends AppCompatActivity {
 
         ciudad = getIntent().getExtras().getBundle("Bundle").getString("ciudad");
 
-        String URL = "http://api.openweathermap.org/data/2.5/weather?q=" + ciudad + ",sp&appid=34ed8abe822a0f7b2f3565c48cc88e42";
+        String URL = "http://api.openweathermap.org/data/2.5/weather?q=" + ciudad + ",ES&appid=34ed8abe822a0f7b2f3565c48cc88e42";
 
         findViews();
 
@@ -83,7 +83,7 @@ public class CiudadTiempoJSON extends AppCompatActivity {
     }
 
     private void mostrar() {
-        txtV_NombreCiudad.setText(ciudadAObservar.getNombre());
+        txtV_NombreCiudad.setText("Prevision de tiempo para " + ciudadAObservar.getNombre());
         txtV_HumedadCiudad.setText(Double.toString(ciudadAObservar.getHumedad()));
         txtV_PresionCiudad.setText(Double.toString(ciudadAObservar.getPresion()));
         txtV_TemperaturasCiudad.setText(Double.toString(ciudadAObservar.getTemperatura()));
