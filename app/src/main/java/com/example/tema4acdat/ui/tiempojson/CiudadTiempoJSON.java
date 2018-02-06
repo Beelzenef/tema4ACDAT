@@ -64,8 +64,7 @@ public class CiudadTiempoJSON extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     progreso.dismiss();
-                    ciudadAObservar = AnalisisJSON.leerTiempo(response);
-                    ciudadAObservar.setNombre(ciudad);
+                    ciudadAObservar = AnalisisJSON.leerTiempo(response, new Ciudad(), ciudad);
                     mostrar();
                 } catch (Exception e) {
                     Toast.makeText(CiudadTiempoJSON.this, "¡Error al mostrar tiempo! :(",

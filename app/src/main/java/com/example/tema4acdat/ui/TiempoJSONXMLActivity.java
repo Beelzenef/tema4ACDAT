@@ -19,6 +19,7 @@ import com.example.tema4acdat.utils.AnalisisJSON;
 import com.example.tema4acdat.utils.AnalisisXML;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class TiempoJSONXMLActivity extends AppCompatActivity {
             case R.id.btn_GuardarPrevisiones:
                 for (int i = 0; i < listaCiudades.size(); i++)
                 {
-                    descarga("http://api.openweathermap.org/data/2.5/weather?q=" + listaCiudades.get(i) + ",ES&appid=34ed8abe822a0f7b2f3565c48cc88e42");
+                    descarga("http://api.openweathermap.org/data/2.5/weather?q=" + listaCiudades.get(i) + ",ES&appid=34ed8abe822a0f7b2f3565c48cc88e42", listaCiudades.get(i));
                 }
                 guardarXML();
                 guardarJSON();
@@ -57,7 +58,7 @@ public class TiempoJSONXMLActivity extends AppCompatActivity {
         }
     }
 
-    private void descarga(String web) {
+    private void descarga(String web, final String nombreCiudad) {
 
         final ProgressDialog progreso = new ProgressDialog(this);
         RestClient.get(web, new JsonHttpResponseHandler() {
@@ -74,7 +75,7 @@ public class TiempoJSONXMLActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     progreso.dismiss();
-                    listaAGuardar.add((AnalisisJSON.leerTiempo(response)));
+                    listaAGuardar.add((AnalisisJSON.leerTiempo(response, new Ciudad(), nombreCiudad)));
                 } catch (Exception e) {
                     Toast.makeText(TiempoJSONXMLActivity.this, "¡Error al mostrar tiempo! :(",
                             Toast.LENGTH_SHORT).show();
@@ -119,10 +120,10 @@ public class TiempoJSONXMLActivity extends AppCompatActivity {
 
     private void guardarJSON() {
         try {
-            throw new IOException();
-            //Toast.makeText(getApplicationContext(), "JSON creado :)", Toast.LENGTH_SHORT).show();
+            AnalisisJSON.escribirJSON(listaAGuardar, "previsiones.json");
+            Toast.makeText(getApplicationContext(), "JSON creado :)", Toast.LENGTH_SHORT).show();
         }
-        catch (IOException e) {
+        catch (IOException | JSONException e) {
             Toast.makeText(getApplicationContext(), "¡Error de creación! :(", Toast.LENGTH_SHORT).show();
         }
     }
