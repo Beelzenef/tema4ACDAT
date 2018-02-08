@@ -56,7 +56,7 @@ public class AnalisisJSON {
         JSONArray listaEstacionesJSON = texto.getJSONArray("result");
         JSONObject estacionJSON;
 
-        for (int i = 0; i < listaEstaciones.size() ; i++) {
+        for (int i = 0; i < listaEstacionesJSON.length() ; i++) {
             estacionJSON = listaEstacionesJSON.getJSONObject(i);
 
             estacionLeida = new Estacion();

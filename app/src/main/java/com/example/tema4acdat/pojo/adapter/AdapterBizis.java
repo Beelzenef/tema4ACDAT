@@ -18,11 +18,7 @@ import java.util.ArrayList;
 
 public class AdapterBizis extends RecyclerView.Adapter<AdapterBizis.ViewHolder> {
 
-    private ArrayList<Estacion> listaE;
-    private Context context;
-
-    // Define listener member variable
-    private OnItemClickListener listener;
+    private ArrayList<Estacion> listaEstaciones;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +34,7 @@ public class AdapterBizis extends RecyclerView.Adapter<AdapterBizis.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Estacion estacion = listaE.get(position);
+        Estacion estacion = listaEstaciones.get(position);
 
         TextView txtV = holder.txtV_NombreEstacion;
         txtV.setText(estacion.getDireccion());
@@ -46,12 +42,22 @@ public class AdapterBizis extends RecyclerView.Adapter<AdapterBizis.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return listaE.size();
+        return listaEstaciones.size();
     }
 
-    public AdapterBizis(Context c, ArrayList<Estacion> listaE) {
-        this.listaE = listaE;
-        this.context = c;
+    public AdapterBizis() {
+        this.listaEstaciones = new ArrayList<>();
+    }
+
+    public AdapterBizis(ArrayList<Estacion> listaEstaciones) {
+        this.listaEstaciones.addAll(listaEstaciones);
+    }
+
+    public void clear() { this.listaEstaciones.clear(); }
+
+    public void addAll(ArrayList<Estacion> listaEstaciones) {
+        this.listaEstaciones.addAll(listaEstaciones);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,24 +68,6 @@ public class AdapterBizis extends RecyclerView.Adapter<AdapterBizis.ViewHolder> 
             super(itemView);
 
             txtV_NombreEstacion = (TextView) itemView.findViewById(R.id.txtV_NombreItem);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(itemView, position);
-                        }
-                    }
-                }
-            });
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
-    }
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
     }
 }
