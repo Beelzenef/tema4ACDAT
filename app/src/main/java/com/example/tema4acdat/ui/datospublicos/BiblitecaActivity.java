@@ -1,15 +1,23 @@
 package com.example.tema4acdat.ui.datospublicos;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tema4acdat.R;
 import com.example.tema4acdat.pojo.Biblioteca;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BiblitecaActivity extends AppCompatActivity {
 
@@ -43,25 +51,49 @@ public class BiblitecaActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.txtV_BiblioURL:
-                Uri uri = Uri.parse(txtV_BiblioURL.getText().toString());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                if (intent.resolveActivity(getPackageManager()) != null)
-                    startActivity(intent);
-                else
-                    Toast.makeText(getApplicationContext(), "No hay un navegador", Toast.LENGTH_SHORT).show();
+                abrirURL();
                 break;
             case R.id.txtV_BiblioEmail:
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-
-                emailIntent.setType("plain/text");
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, txtV_BiblioEmail.getText().toString());
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Contenido");
-                if (emailIntent.resolveActivity(getPackageManager()) != null)
-                    startActivity(Intent.createChooser(emailIntent, "Enviar mensaje..."));
-                else
-                    Toast.makeText(getApplicationContext(), "No hay cliente de correo", Toast.LENGTH_SHORT).show();
+                enviarEmail();
                 break;
         }
     }
+
+    private void abrirURL() {
+        Uri uri = Uri.parse(txtV_BiblioURL.getText().toString());
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+        else
+            Toast.makeText(getApplicationContext(), "No hay un navegador", Toast.LENGTH_SHORT).show();
+    }
+
+    private void enviarEmail() {
+
+        List<Intent> emailAppLauncherIntents = new ArrayList<>();
+
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("plain/text");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, txtV_BiblioEmail.getText().toString());
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Contenido");
+
+        PackageManager packageManager = getPackageManager();
+
+        //All installed apps that can handle email intent:
+        List<ResolveInfo> emailApps = packageManager.queryIntentActivities(emailIntent, PackageManager.MATCH_ALL);
+
+        for (ResolveInfo resolveInfo : emailApps) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            Intent launchIntent = packageManager.getLaunchIntentForPackage(packageName);
+            emailAppLauncherIntents.add(launchIntent);
+        }
+
+        //Create chooser
+        Intent chooserIntent = Intent.createChooser(new Intent(), "Select email app:");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, emailAppLauncherIntents.toArray(new Parcelable[emailAppLauncherIntents.size()]));
+        startActivity(chooserIntent);
+    }
+
 }
