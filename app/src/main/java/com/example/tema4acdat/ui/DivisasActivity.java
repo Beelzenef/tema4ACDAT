@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,9 @@ public class DivisasActivity extends AppCompatActivity {
         edt_CambioActual = (EditText) findViewById(R.id.edT_Cambio);
         radB_aDolares = (RadioButton) findViewById(R.id.radB_ADolares);
         radB_aEuros = (RadioButton) findViewById(R.id.radB_AEuros);
+
+        tomarCambioJSON();
+        edt_CambioActual.setText(Double.toString(miConversor.getCambioMoneda()));
     }
 
     public void onClick_ConvertirMoneda(View v) {
@@ -59,15 +63,7 @@ public class DivisasActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-
-        return networkInfo != null && networkInfo.isConnected();
-    }
-
-    void hacerCambio() {
-
+    private void tomarCambioJSON() {
         RestClient.get(DATA, new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
@@ -88,21 +84,23 @@ public class DivisasActivity extends AppCompatActivity {
                 miConversor.cambioDefault();
             }
         });
+    }
 
-        edt_CambioActual.setText(Double.toString(miConversor.getCambioMoneda()));
+    void hacerCambio() {
 
-        // Seleccionando tipo de cambio
-        if (radB_aDolares.isChecked()) {
-            if (edt_aEuros.getText().length() != 0 && !edt_aEuros.getText().toString().equals(".")) {
-                edt_aDolares.setText(miConversor.cambioADolares(edt_aEuros.getText().toString()));
-                Toast.makeText(this, "EUR --> USD", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else {
-            if (edt_aDolares.getText().length() != 0 && edt_aDolares.getText().toString().equals(".")) {
+        // Cambiar a euros
+        if (radB_aEuros.isChecked()) {
+            if (!TextUtils.isEmpty(edt_aDolares.getText()) && !edt_aDolares.getText().toString().equals(".")) {
                 edt_aEuros.setText(miConversor.cambioAEuros(edt_aDolares.getText().toString()));
                 Toast.makeText(this, "USD --> EUR", Toast.LENGTH_SHORT).show();
             }
         }
+        if (radB_aDolares.isChecked()) {
+            if (!TextUtils.isEmpty(edt_aEuros.getText()) && !edt_aEuros.getText().toString().equals(".")) {
+                edt_aDolares.setText(miConversor.cambioADolares(edt_aEuros.getText().toString()));
+                Toast.makeText(this, "EUR --> USD", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 }
