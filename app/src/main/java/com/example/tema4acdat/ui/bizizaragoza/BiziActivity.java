@@ -1,6 +1,7 @@
 package com.example.tema4acdat.ui.bizizaragoza;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.tema4acdat.R;
+import com.example.tema4acdat.network.ApiAdapter;
+import com.example.tema4acdat.network.ApiService;
 import com.example.tema4acdat.network.RestClient;
+import com.example.tema4acdat.pojo.DatosGSON;
 import com.example.tema4acdat.pojo.Estacion;
 import com.example.tema4acdat.pojo.adapter.AdapterBizis;
 import com.example.tema4acdat.pojo.adapter.ClickListener;
@@ -21,9 +25,13 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BiziActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,35 +77,52 @@ public class BiziActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void descarga(String web) {
-        final ProgressDialog progreso = new ProgressDialog(this);
-        RestClient.get(web, new JsonHttpResponseHandler() {
-            @Override
-            public void onStart() {
-                super.onStart();
-                progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progreso.setMessage("Conectando...");
-                progreso.setCancelable(true);
-                progreso.show();
-            }
+        ApiService.GitHubClient apiservice = ApiAdapter.getApiService();
 
+        final Call<DatosGSON> call = apiservice.getEstaciones();
+
+        final ProgressDialog progreso = new ProgressDialog(BiziActivity.this);
+        progreso.setMessage("Descargando estaciones...");
+        progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progreso.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    progreso.dismiss();
-                    // Cargar estaciones
-                    listaEstaciones = AnalisisJSON.leerEstaciones(response);
+            public void onCancel(DialogInterface dialogInterface) {
+                call.cancel();
+            }
+        });
+        progreso.show();
+
+        call.enqueue(new Callback<DatosGSON>() {
+            @Override
+            public void onResponse(Call<DatosGSON> call, Response<DatosGSON> response) {
+                progreso.dismiss();
+                if (response.isSuccessful()) {
+                    adapter.clear();
+                    listaEstaciones = response.body().getResult();
+                    adapter.addAll(listaEstaciones);
                     mostrar();
-                } catch (Exception e) {
-                    Toast.makeText(BiziActivity.this, "¡Error al mostrar estaciones! :(",
-                            Toast.LENGTH_SHORT).show();
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Error en la descarga: " + response.code());
+                    if (response.body() != null) {
+                        sb.append(response.body());
+                    }
+                    if (response.errorBody() != null) {
+                        try {
+                            sb.append(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    Toast.makeText(BiziActivity.this, sb, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+            public void onFailure(Call<DatosGSON> call, Throwable t) {
                 progreso.dismiss();
-                Toast.makeText(BiziActivity.this, "¡Ha fallado la descarga! :(",
-                        Toast.LENGTH_SHORT).show();
+                if (t != null)
+                    Toast.makeText(BiziActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

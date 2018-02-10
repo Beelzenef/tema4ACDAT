@@ -60,10 +60,10 @@ public class AnalisisJSON {
             estacionJSON = listaEstacionesJSON.getJSONObject(i);
 
             estacionLeida = new Estacion();
-            estacionLeida.setDireccion(estacionJSON.getString("title"));
+            estacionLeida.setDescription(estacionJSON.getString("title"));
             estacionLeida.setEstado(estacionJSON.getString("estado"));
             estacionLeida.setBicisDisponibles(estacionJSON.getInt("bicisDisponibles"));
-            estacionLeida.setAnclajes(estacionJSON.getInt("anclajesDisponibles"));
+            estacionLeida.setAnclajesDisponibles(estacionJSON.getInt("anclajesDisponibles"));
 
             listaEstaciones.add(estacionLeida);
         }

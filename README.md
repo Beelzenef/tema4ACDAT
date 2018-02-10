@@ -28,9 +28,9 @@ Se ha recuperado la aplicación de BiziZaragoza, que anteriormente leíamos a tr
 
 Los datos se han obtenido de [BiziZaragoza](https://www.zaragoza.es/sede/portal/datos-abiertos/servicio/catalogo/70), en el siguiente [fichero JSON](https://www.zaragoza.es/sede/servicio/urbanismo-infraestructuras/estacion-bicicleta.json).
 
-#### Posibles mejoras
+#### Actualización
 
-No se ha implementado Retrofit y GSON.
+Se ha implementado Retrofit y GSON.
 
 ## Mostrando datos
 

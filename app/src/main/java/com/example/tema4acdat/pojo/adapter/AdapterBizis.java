@@ -37,7 +37,7 @@ public class AdapterBizis extends RecyclerView.Adapter<AdapterBizis.ViewHolder> 
         Estacion estacion = listaEstaciones.get(position);
 
         TextView txtV = holder.txtV_NombreEstacion;
-        txtV.setText(estacion.getDireccion());
+        txtV.setText(estacion.getDescription());
     }
 
     @Override

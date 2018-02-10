@@ -26,8 +26,8 @@ public class EstacionActivity extends AppCompatActivity {
         estacionElegida = getIntent().getExtras().getBundle("Bundle").getParcelable(Estacion.TAG);
 
         edT_Estado.setText(estacionElegida.getEstado());
-        edT_Direccion.setText(estacionElegida.getDireccion());
-        edT_Anclajes.setText(Integer.toString(estacionElegida.getAnclajes()));
+        edT_Direccion.setText(estacionElegida.getDescription());
+        edT_Anclajes.setText(Integer.toString(estacionElegida.getAnclajesDisponibles()));
         edT_BicisDisponibles.setText(Integer.toString(estacionElegida.getBicisDisponibles()));
     }
 

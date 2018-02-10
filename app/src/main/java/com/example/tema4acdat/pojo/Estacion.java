@@ -1,31 +1,46 @@
 package com.example.tema4acdat.pojo;
 
-/**
- * Created by Beelzenef on 01/02/2018.
- */
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
- * Clase Estación de bicletas
+ * Created by Beelzenef on 10/02/2018.
  */
 
 public class Estacion implements Parcelable {
 
-    private String direccion;
-    private String estado;
-    private int anclajes;
-    private int bicisDisponibles;
-
     public static final String TAG = "Estacion";
 
-    public String getDireccion() {
-        return direccion;
+    @SerializedName("estado")
+    @Expose
+    private String estado;
+    @SerializedName("bicisDisponibles")
+    @Expose
+    private Integer bicisDisponibles;
+    @SerializedName("anclajesDisponibles")
+    @Expose
+    private Integer anclajesDisponibles;
+    @SerializedName("title")
+    @Expose
+    private String title;
+
+    public Integer getAnclajesDisponibles() {
+        return anclajesDisponibles;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setAnclajesDisponibles(Integer anclajesDisponibles) {
+        this.anclajesDisponibles = anclajesDisponibles;
+    }
+
+    public String getDescription() {
+        return title;
+    }
+
+    public void setDescription(String description) {
+        this.title = description;
     }
 
     public String getEstado() {
@@ -33,18 +48,10 @@ public class Estacion implements Parcelable {
     }
 
     public void setEstado(String estado) {
-        this.estado = estado;
+        this.title = estado;
     }
 
-    public int getAnclajes() {
-        return anclajes;
-    }
-
-    public void setAnclajes(int anclajes) {
-        this.anclajes = anclajes;
-    }
-
-    public int getBicisDisponibles() {
+    public Integer getBicisDisponibles() {
         return bicisDisponibles;
     }
 
@@ -62,16 +69,16 @@ public class Estacion implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(direccion);
+        parcel.writeString(title);
         parcel.writeString(estado);
-        parcel.writeInt(anclajes);
+        parcel.writeInt(anclajesDisponibles);
         parcel.writeInt(bicisDisponibles);
     }
 
     private Estacion(Parcel source) {
-        this.direccion = source.readString();
+        this.title = source.readString();
         this.estado = source.readString();
-        this.anclajes = source.readInt();
+        this.anclajesDisponibles = source.readInt();
         this.bicisDisponibles = source.readInt();
     }
 
@@ -89,6 +96,6 @@ public class Estacion implements Parcelable {
 
     @Override
     public String toString() {
-        return this.direccion;
+        return this.title;
     }
 }
